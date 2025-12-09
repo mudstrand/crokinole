@@ -34,6 +34,7 @@ import adafruit_touchscreen
 DISPLAY_ROTATION = 0  # Specify 0, 90, 180, or 270 degrees
 REPL_ONLY = False  # True to disable graphics
 
+
 # pylint: disable=too-few-public-methods
 class Colors:
     """A collection of colors used for graphic objects."""
@@ -51,7 +52,7 @@ display = board.DISPLAY
 if DISPLAY_ROTATION is not None and DISPLAY_ROTATION in (0, 90, 180, 270):
     display.rotation = DISPLAY_ROTATION
 else:
-    print("Warning: invalid rotation value -- defalting to zero")
+    print('Warning: invalid rotation value -- defalting to zero')
     display.rotation = 0
     time.sleep(1)
 
@@ -101,7 +102,7 @@ elif display.rotation == 270:
         # size=(board.DISPLAY.width, board.DISPLAY.height),
     )
 else:
-    raise ValueError("Rotation value must be 0, 90, 180, or 270")
+    raise ValueError('Rotation value must be 0, 90, 180, or 270')
 
 # Define the graphic objects if REPL_ONLY = False.
 if not REPL_ONLY:
@@ -110,7 +111,7 @@ if not REPL_ONLY:
 
     coordinates = Label(
         font=font_0,
-        text="calib: ((x_min, x_max), (y_min, y_max))",
+        text='calib: ((x_min, x_max), (y_min, y_max))',
         color=Colors.WHITE,
     )
     coordinates.anchor_point = (0.5, 0.5)
@@ -121,7 +122,7 @@ if not REPL_ONLY:
 
     display_rotation = Label(
         font=font_0,
-        text="rotation: " + str(display.rotation),
+        text='rotation: ' + str(display.rotation),
         color=Colors.WHITE,
     )
     display_rotation.anchor_point = (0.5, 0.5)
@@ -169,13 +170,13 @@ if not REPL_ONLY:
 # Reset x and y values to raw touchscreen mid-point before measurement.
 x_min = x_max = y_min = y_max = 65535 // 2
 
-print("Touchscreen Calibrator")
-print("  Use a stylus to swipe slightly beyond the")
-print("  four edges of the visible display area.")
-print(" ")
-print(f"  display rotation: {display.rotation} degrees")
-print("  Calibration values follow:")
-print(" ")
+print('Touchscreen Calibrator')
+print('  Use a stylus to swipe slightly beyond the')
+print('  four edges of the visible display area.')
+print(' ')
+print(f'  display rotation: {display.rotation} degrees')
+print('  Calibration values follow:')
+print(' ')
 
 while True:
     time.sleep(0.100)
@@ -192,6 +193,6 @@ while True:
         y_max = max(y_max, touch[1])
 
         # Show the calibration tuple.
-        print(f"(({x_min}, {x_max}), ({y_min}, {y_max}))")
+        print(f'(({x_min}, {x_max}), ({y_min}, {y_max}))')
         if not REPL_ONLY:
-            coordinates.text = f"calib: (({x_min}, {x_max}), ({y_min}, {y_max}))"
+            coordinates.text = f'calib: (({x_min}, {x_max}), ({y_min}, {y_max}))'
